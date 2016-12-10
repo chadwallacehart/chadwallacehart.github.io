@@ -15,7 +15,14 @@
     // final argument. This should be called to indicate that the block can
     // stop waiting.
     ext.wait_random = function(callback) {
-        wait = Math.random();
+        var wait = Math.random();
+        console.log('Waiting for ' + wait + ' seconds');
+        window.setTimeout(function() {
+            callback();
+        }, wait*1000);
+    };
+
+    ext.wait_time = function(wait, callback) {
         console.log('Waiting for ' + wait + ' seconds');
         window.setTimeout(function() {
             callback();
@@ -26,7 +33,10 @@
     var descriptor = {
         blocks: [
             ['w', 'wait for random time', 'wait_random'],
-        ]
+            [' ', 'wait for %n seconds', 'wait_time', 1]
+        ],
+
+        url: "https://chadwallacehart.github.io"
     };
 
     // Register the extension
