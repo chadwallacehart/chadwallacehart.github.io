@@ -25,7 +25,7 @@
     ext.wait_time = function(wait, callback) {
         console.log('Waiting for ' + wait + ' seconds');
         window.setTimeout(function() {
-            callback();
+           // callback();
         }, wait*1000);
     };
 
