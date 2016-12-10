@@ -33,7 +33,7 @@
     var descriptor = {
         blocks: [
             ['w', 'wait for random time', 'wait_random'],
-            [' ', 'wait for %n seconds', 'wait_time', 1]
+            [' ', 'wait for %n seconds', 'wait_time', '1']
         ],
 
         url: "https://chadwallacehart.github.io"
