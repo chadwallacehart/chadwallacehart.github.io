@@ -25,7 +25,7 @@
     ext.wait_time = function(wait, callback) {
         console.log('Waiting for ' + wait + ' seconds');
         window.setTimeout(function() {
-           // callback();
+           callback();
         }, wait*1000);
     };
 
@@ -33,7 +33,7 @@
     var descriptor = {
         blocks: [
             ['w', 'wait for random time', 'wait_random'],
-            [' ', 'wait for %n seconds', 'wait_time', '1']
+            ['w', 'wait for %n seconds', 'wait_time', '1']
         ],
 
         url: "https://chadwallacehart.github.io"
