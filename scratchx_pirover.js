@@ -14,7 +14,7 @@
         setInterval(function(){
             fetch('https://192.168.100.31/status', fetchInit)
                 .then(function (response) {
-                        console.log(response);
+                        //console.log(response);
                         if (response.ok) {
                             piRoverReady = true;
                             /*return response.text()
@@ -38,7 +38,7 @@
                     piRoverReady = false;
                     //return {status: 0, msg: 'Error'};
                 });
-        }, 5000);
+        }, 10000);
 
     }
 
@@ -61,14 +61,7 @@
     // Functions for block with type 'w' will get a callback function as the
     // final argument. This should be called to indicate that the block can
     // stop waiting.
-    ext.wait_random = function(callback) {
-        var wait = Math.random();
-        console.log('Waiting for ' + wait + ' seconds');
-        window.setTimeout(function() {
-            callback();
-        }, wait*1000);
-    };
-
+/*
     ext.wait_time = function(wait, callback) {
         console.log('Waiting for ' + wait + ' seconds');
         window.setTimeout(function() {
@@ -76,13 +69,77 @@
         }, wait*1000);
     };
 
+
+    ext.forward = function(time, callback) {
+        var url = "http://192.168.100.31/" + "forward/" + time;
+        fetch(url, fetchInit)
+            .then()
+            .catch();
+        window.setTimeout(function() {
+            callback();
+        }, wait*time);
+    };
+
+    ext.backward = function(time, callback) {
+        var url = "http://192.168.100.31/" + "backward/" + time;
+        fetch(url, fetchInit)
+            .then()
+            .catch();
+        window.setTimeout(function() {
+            callback();
+        }, wait*time);
+    };
+
+    ext.spinright = function(time, callback) {
+        var url = "http://192.168.100.31/" + "spinright/" + time;
+        fetch(url, fetchInit)
+            .then()
+            .catch();
+    };
+
+    ext.spinleft = function(time, callback) {
+        var url = "http://192.168.100.31/" + "spinleft/" + time;
+        fetch(url, fetchInit)
+            .then()
+            .catch();
+    };
+
+    ext.disc = function(time, callback) {
+        var url = "http://192.168.100.31/" + "disc/" + time;
+        fetch(url, fetchInit)
+            .then()
+            .catch();
+    };
+*/
+
+    ext.piRover = function(command, time, callback){
+      var url = "http://192.168.100.31/" + command + "/" + time;
+        fetch(url, fetchInit)
+            .then()
+            .catch();
+        window.setTimeout(function() {
+            callback();
+        }, wait*time);
+    };
+
+    ext.piRoverOff = function(){
+        var url = "http://192.168.100.31/" + off;
+        fetch(url, fetchInit)
+            .then()
+            .catch();
+    };
+
+
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['w', 'wait for random time', 'wait_random'],
             ['w', 'wait for %n seconds', 'wait_time', '1'],
-            ['w', 'wait for %n seconds', 'wait_time', '1']
-        ],
+            ['w', 'Forward for %n seconds', 'piRover', 'forward', '1'],
+            ['w', 'Forward for %n seconds', 'piRover', 'backward', '1'],
+            ['w', 'Turn right for %n seconds', 'piRover','spinright', '1'],
+            ['w', 'Turn left for %n seconds', 'piRover','spinleft', '1'],
+            ['w', 'Disc launcher for %n seconds', 'piRover','disc', '1'],
+            [' '], 'Stop all Rover functions', 'piRoverOff', 'off'],
 
         url: "https://chadwallacehart.github.io"
     };
