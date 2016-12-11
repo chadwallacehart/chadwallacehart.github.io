@@ -14,7 +14,7 @@
         setInterval(function(){
             fetch('https://192.168.100.31/status', fetchInit)
                 .then(function (response) {
-                        console.log(response);
+                        //console.log(response);
                         if (response.ok) {
                             piRoverReady = true;
                             /*return response.text()
@@ -36,7 +36,6 @@
                 .catch(function (error) {
                     console.log('There has been a problem with your fetch operation: ' + error.message);
                     piRoverReady = false;
-                    //return {status: 0, msg: 'Error'};
                 });
         }, 10000);
 
@@ -69,9 +68,10 @@
                 console.log(response);
             })
             .catch();
+
         window.setTimeout(function() {
             callback();
-        }, wait*time);
+        }, time*1000);
     };
 
     ext.piRoverOff = function(){
