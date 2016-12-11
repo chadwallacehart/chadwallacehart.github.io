@@ -115,9 +115,17 @@
 */
 
     ext.piRover = function(command, time, callback){
+    var fetchHeaders = new Headers();
+    var fetchInit = { method: 'GET',
+        headers: fetchHeaders,
+        mode: 'cors',
+        cache: 'default' };
+        
       var url = "http://192.168.100.31/" + command + "/" + time;
         fetch(url, fetchInit)
-            .then()
+            .then(function (response) {
+                console.log(response);
+            })
             .catch();
         window.setTimeout(function() {
             callback();
