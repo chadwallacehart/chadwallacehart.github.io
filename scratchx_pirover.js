@@ -14,7 +14,7 @@
         setInterval(function(){
             fetch('https://192.168.100.31/status', fetchInit)
                 .then(function (response) {
-                        //console.log(response);
+                        console.log(response);
                         if (response.ok) {
                             piRoverReady = true;
                             /*return response.text()
@@ -118,10 +118,10 @@
     var fetchHeaders = new Headers();
     var fetchInit = { method: 'GET',
         headers: fetchHeaders,
-        mode: 'cors',
+        mode: 'no-cors',
         cache: 'default' };
         
-      var url = "http://192.168.100.31/" + command + "/" + time;
+      var url = "https://192.168.100.31/" + command + "/" + time;
         fetch(url, fetchInit)
             .then(function (response) {
                 console.log(response);
@@ -133,7 +133,7 @@
     };
 
     ext.piRoverOff = function(){
-        var url = "http://192.168.100.31/" + off;
+        var url = "https://192.168.100.31/" + off;
         fetch(url, fetchInit)
             .then()
             .catch();
