@@ -14,11 +14,9 @@
         setInterval(function(){
             fetch('https://192.168.100.31/status', fetchInit)
                 .then(function (response) {
-                        //console.log(response);
+                        console.log(response);
                         if (response.ok) {
                             piRoverReady = true;
-                            console.log(response);
-
                             /*return response.text()
                              .then(function (text) {
                              if (text == "ready") {
@@ -54,7 +52,7 @@
         if (piRoverReady == true)
             return {status: 2, msg: 'Ready'};
         else
-            return {status: 1, msg: 'Error'};
+            return {status: 0, msg: 'Error'};
     };
 
     // Functions for block with type 'w' will get a callback function as the
