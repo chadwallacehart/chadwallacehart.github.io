@@ -17,9 +17,11 @@
     ext._getStatus = function() {
         fetch('https://192.168.100.31/status', fetchInit)
             .then(function (response) {
-                    console.log(response);
+                    //console.log(response);
                     if (response.ok) {
-                        return response.text()
+                        return {status: 2, msg: 'Ready'};
+
+                        /*return response.text()
                             .then(function (text) {
                                 if (text == "ready") {
                                     return {status: 2, msg: 'Ready'};
@@ -28,6 +30,10 @@
                                 else
                                     return {status: 1, msg: 'Waiting'};
                             });
+                            */
+                    }
+                    else{
+                        return {status: 1, msg: 'Error'};
                     }
                 }
             )
