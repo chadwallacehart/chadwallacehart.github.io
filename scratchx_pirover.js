@@ -17,6 +17,7 @@
                         //console.log(response);
                         if (response.ok) {
                             piRoverReady = true;
+                            console.log(response);
 
                             /*return response.text()
                              .then(function (text) {
@@ -41,7 +42,6 @@
                 });
         }, 5000);
 
-
     }
 
 
@@ -51,7 +51,7 @@
     // Status reporting code
     // Use this to report missing hardware, plugin or unsupported browser
     ext._getStatus = function() {
-        if (piRoverReady)
+        if (piRoverReady == true)
             return {status: 2, msg: 'Ready'};
         else
             return {status: 1, msg: 'Error'};
