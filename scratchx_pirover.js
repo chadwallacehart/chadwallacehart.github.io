@@ -89,11 +89,15 @@
 
     // Register the extension
     ScratchExtensions.register('piRover Control extension', descriptor, ext);
+
+
+    //start
+    console.log("started");
+    connectionCheck();
+
 })({});
 
 
-console.log("started");
-connectionCheck();
 
 //Failed attempt to write in front of the flash screen
 /*
