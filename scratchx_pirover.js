@@ -49,9 +49,6 @@
     // Status reporting code
     // Use this to report missing hardware, plugin or unsupported browser
     ext._getStatus = function() {
-
-//        return {status: 2, msg: 'Ready'};
-
         if (piRoverReady == true)
             return {status: 2, msg: 'Ready'};
         else if (piRoverReady == "waiting")
@@ -63,64 +60,9 @@
     // Functions for block with type 'w' will get a callback function as the
     // final argument. This should be called to indicate that the block can
     // stop waiting.
-/*
-    ext.wait_time = function(wait, callback) {
-        console.log('Waiting for ' + wait + ' seconds');
-        window.setTimeout(function() {
-           callback();
-        }, wait*1000);
-    };
-
-
-    ext.forward = function(time, callback) {
-        var url = "http://192.168.100.31/" + "forward/" + time;
-        fetch(url, fetchInit)
-            .then()
-            .catch();
-        window.setTimeout(function() {
-            callback();
-        }, wait*time);
-    };
-
-    ext.backward = function(time, callback) {
-        var url = "http://192.168.100.31/" + "backward/" + time;
-        fetch(url, fetchInit)
-            .then()
-            .catch();
-        window.setTimeout(function() {
-            callback();
-        }, wait*time);
-    };
-
-    ext.spinright = function(time, callback) {
-        var url = "http://192.168.100.31/" + "spinright/" + time;
-        fetch(url, fetchInit)
-            .then()
-            .catch();
-    };
-
-    ext.spinleft = function(time, callback) {
-        var url = "http://192.168.100.31/" + "spinleft/" + time;
-        fetch(url, fetchInit)
-            .then()
-            .catch();
-    };
-
-    ext.disc = function(time, callback) {
-        var url = "http://192.168.100.31/" + "disc/" + time;
-        fetch(url, fetchInit)
-            .then()
-            .catch();
-    };
-*/
 
     ext.piRover = function(command, time, callback){
-    var fetchHeaders = new Headers();
-    var fetchInit = { method: 'GET',
-        headers: fetchHeaders,
-        mode: 'no-cors',
-        cache: 'default' };
-        
+
       var url = "https://192.168.100.31/" + command + "/" + time;
         fetch(url, fetchInit)
             .then(function (response) {
