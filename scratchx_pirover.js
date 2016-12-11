@@ -3,8 +3,11 @@
  */
 (function(ext) {
 
-    var xhr = new XMLHttpRequest();
-
+    var fetchHeaders = new Headers();
+    var fetchInit = { method: 'GET',
+        headers: fetchHeaders,
+        mode: 'cors',
+        cache: 'default' };
 
     // Cleanup function when the extension is unloaded
     ext._shutdown = function() {};
@@ -12,21 +15,23 @@
     // Status reporting code
     // Use this to report missing hardware, plugin or unsupported browser
     ext._getStatus = function() {
-        xhr.open("GET", "https://192.168.100.31/status", false);
-        xhr.send();
+        //xhr.open("GET", "https://192.168.100.31/status", false);
+        //xhr.send();
+        fetch('https://192.168.100.31/status', fetchInit)
+            .then(function(response) {
 
-        if (xhr.status == "200"){
-            if (xhr.statusText == "ready")
-                return {status: 2, msg: 'Ready'};
-            else
-                return {status: 1, msg: 'Waiting'};
-        }
-        else {
-            return {status: 0, msg: 'Error'};
-        }
+                console.log(response);
 
-        console.log(xhr.status + " " + xhr.statusText);
-
+                if (response.ok) {
+                    if (response.text == "ready")
+                        return {status: 2, msg: 'Ready'};
+                    else
+                        return {status: 1, msg: 'Waiting'};
+                }
+                else {
+                    return {status: 0, msg: 'Error'};
+                }
+            })
     };
 
     // Functions for block with type 'w' will get a callback function as the
@@ -58,7 +63,7 @@
     };
 
     // Register the extension
-    ScratchExtensions.register('Random wait extension', descriptor, ext);
+    ScratchExtensions.register('piRover Control extension', descriptor, ext);
 })({});
 
 //Failed attempt to write in front of the flash screen
