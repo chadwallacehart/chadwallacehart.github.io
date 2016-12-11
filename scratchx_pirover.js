@@ -8,6 +8,42 @@
         headers: fetchHeaders,
         mode: 'cors',
         cache: 'default' };
+    var piRoverReady = false;
+
+    function connectionCheck(){
+        setInterval(function(){
+            fetch('https://192.168.100.31/status', fetchInit)
+                .then(function (response) {
+                        //console.log(response);
+                        if (response.ok) {
+                            piRoverReady = true;
+
+                            /*return response.text()
+                             .then(function (text) {
+                             if (text == "ready") {
+                             return {status: 2, msg: 'Ready'};
+                             console.log(text);
+                             }
+                             else
+                             return {status: 1, msg: 'Waiting'};
+                             });
+                             */
+                        }
+                        else{
+                            piRoverReady = false;
+                        }
+                    }
+                )
+                .catch(function (error) {
+                    console.log('There has been a problem with your fetch operation: ' + error.message);
+                    piRoverReady = false;
+                    //return {status: 0, msg: 'Error'};
+                });
+        }, 5000);
+
+
+    }
+
 
     // Cleanup function when the extension is unloaded
     ext._shutdown = function() {};
@@ -15,34 +51,10 @@
     // Status reporting code
     // Use this to report missing hardware, plugin or unsupported browser
     ext._getStatus = function() {
-        setInterval(function(){
-        fetch('https://192.168.100.31/status', fetchInit)
-            .then(function (response) {
-                    //console.log(response);
-                    if (response.ok) {
-                        return {status: 2, msg: 'Ready'};
-
-                        /*return response.text()
-                            .then(function (text) {
-                                if (text == "ready") {
-                                    return {status: 2, msg: 'Ready'};
-                                    console.log(text);
-                                }
-                                else
-                                    return {status: 1, msg: 'Waiting'};
-                            });
-                            */
-                    }
-                    else{
-                        return {status: 1, msg: 'Error'};
-                    }
-                }
-            )
-            .catch(function (error) {
-                console.log('There has been a problem with your fetch operation: ' + error.message);
-                return {status: 0, msg: 'Error'};
-            });
-        }, 5000);
+        if (piRoverReady)
+            return {status: 2, msg: 'Ready'};
+        else
+            return {status: 1, msg: 'Error'};
     };
 
     // Functions for block with type 'w' will get a callback function as the
