@@ -49,6 +49,9 @@
     // Status reporting code
     // Use this to report missing hardware, plugin or unsupported browser
     ext._getStatus = function() {
+
+//        return {status: 2, msg: 'Ready'};
+
         if (piRoverReady == true)
             return {status: 2, msg: 'Ready'};
         else
@@ -77,6 +80,7 @@
     var descriptor = {
         blocks: [
             ['w', 'wait for random time', 'wait_random'],
+            ['w', 'wait for %n seconds', 'wait_time', '1'],
             ['w', 'wait for %n seconds', 'wait_time', '1']
         ],
 
@@ -86,6 +90,10 @@
     // Register the extension
     ScratchExtensions.register('piRover Control extension', descriptor, ext);
 })({});
+
+
+console.log("started");
+connectionCheck();
 
 //Failed attempt to write in front of the flash screen
 /*
