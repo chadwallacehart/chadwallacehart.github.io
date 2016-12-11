@@ -15,23 +15,26 @@
     // Status reporting code
     // Use this to report missing hardware, plugin or unsupported browser
     ext._getStatus = function() {
-        //xhr.open("GET", "https://192.168.100.31/status", false);
-        //xhr.send();
         fetch('https://192.168.100.31/status', fetchInit)
-            .then(function(response) {
-
-                console.log(response);
-
-                if (response.ok) {
-                    if (response.text == "ready")
-                        return {status: 2, msg: 'Ready'};
-                    else
-                        return {status: 1, msg: 'Waiting'};
+            .then(function (response) {
+                    console.log(response);
+                    if (response.ok) {
+                        return response.text()
+                            .then(function (text) {
+                                if (text == "ready") {
+                                    return {status: 2, msg: 'Ready'};
+                                    console.log(text);
+                                }
+                                else
+                                    return {status: 1, msg: 'Waiting'};
+                            });
+                    }
                 }
-                else {
-                    return {status: 0, msg: 'Error'};
-                }
-            })
+            )
+            .catch(function (error) {
+                console.log('There has been a problem with your fetch operation: ' + error.message);
+                return {status: 0, msg: 'Error'};
+            });
     };
 
     // Functions for block with type 'w' will get a callback function as the
