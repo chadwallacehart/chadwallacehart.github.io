@@ -8,7 +8,7 @@
         headers: fetchHeaders,
         mode: 'cors',
         cache: 'default' };
-    var piRoverReady = false;
+    var piRoverReady = "waiting";
 
     function connectionCheck(){
         setInterval(function(){
@@ -54,6 +54,8 @@
 
         if (piRoverReady == true)
             return {status: 2, msg: 'Ready'};
+        else if (piRoverReady == "waiting")
+            return {status: 1, msg: "Waiting to load"};
         else
             return {status: 0, msg: 'Error'};
     };
@@ -134,11 +136,11 @@
     var descriptor = {
         blocks: [
             //['w', 'wait for %n seconds', 'wait_time', '1'],
-            ['w', 'Forward for %n seconds', 'piRover', 'forward', '1'],
-            ['w', 'Forward for %n seconds', 'piRover', 'backward', '1'],
-            ['w', 'Turn right for %n seconds', 'piRover','spinright', '1'],
-            ['w', 'Turn left for %n seconds', 'piRover','spinleft', '1'],
-            ['w', 'Disc launcher for %n seconds', 'piRover','disc', '1'],
+            ['w', '%n for %n seconds', 'piRover', 'forward', '1'],
+            ['w', '%n for %n seconds', 'piRover', 'backward', '1'],
+            ['w', '%n for %n seconds', 'piRover','spinright', '1'],
+            ['w', '%n for %n seconds', 'piRover','spinleft', '1'],
+            ['w', '%n for %n seconds', 'piRover','disc', '1'],
             [' ', 'Stop all piRover functions', 'piRoverOff', 'off']
         ],
 
