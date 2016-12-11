@@ -25,6 +25,8 @@
             return {status: 0, msg: 'Error'};
         }
 
+        console.log(xhr.status + " " + xhr.statusText);
+
     };
 
     // Functions for block with type 'w' will get a callback function as the
