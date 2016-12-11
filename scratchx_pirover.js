@@ -133,13 +133,14 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['w', 'wait for %n seconds', 'wait_time', '1'],
+            //['w', 'wait for %n seconds', 'wait_time', '1'],
             ['w', 'Forward for %n seconds', 'piRover', 'forward', '1'],
             ['w', 'Forward for %n seconds', 'piRover', 'backward', '1'],
             ['w', 'Turn right for %n seconds', 'piRover','spinright', '1'],
             ['w', 'Turn left for %n seconds', 'piRover','spinleft', '1'],
             ['w', 'Disc launcher for %n seconds', 'piRover','disc', '1'],
-            [' '], 'Stop all Rover functions', 'piRoverOff', 'off'],
+            [' ', 'Stop all piRover functions', 'piRoverOff', 'off']
+        ],
 
         url: "https://chadwallacehart.github.io"
     };
