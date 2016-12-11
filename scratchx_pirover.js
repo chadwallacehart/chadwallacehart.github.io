@@ -15,6 +15,7 @@
     // Status reporting code
     // Use this to report missing hardware, plugin or unsupported browser
     ext._getStatus = function() {
+        setInterval(function(){
         fetch('https://192.168.100.31/status', fetchInit)
             .then(function (response) {
                     //console.log(response);
@@ -41,6 +42,7 @@
                 console.log('There has been a problem with your fetch operation: ' + error.message);
                 return {status: 0, msg: 'Error'};
             });
+        }, 5000);
     };
 
     // Functions for block with type 'w' will get a callback function as the
